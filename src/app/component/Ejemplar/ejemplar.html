@@ -1,0 +1,40 @@
+<div layout="row" layout-align="center start">
+	<h1> Mantenedor de ejemplares</h1>
+</div>
+<div layout="row" layout-align="center">
+	<div>
+		<md-table-container>
+			<table md-table>
+				<thead md-head>
+					<tr md-row>
+						<th md-column>Libro</th>
+						<th md-column>Autor</th>
+						<th md-column>Alumno</th>
+						<th md-column>Estado</th>
+						<th md-column>Acciones</th>
+
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr ng-repeat="ejemplar in vm.ejemplar" md-row>
+						<td md-cell>{{ejemplar.libro.titulo}}</td>
+						<td md-cell>{{ejemplar.libro.autor.nombre}} {{ejemplar.libro.autor.apellido}}</td>
+						<td md-cell>{{ejemplar.usuario.nombre}} {{ejemplar.usuario.apellido}}</td>
+						<td md-cell>{{ejemplar.estado.descripcion}}</td>
+						<td md-cell>
+						<a ui-sref="verEjemplar({id:ejemplar.id})"><md-button class="md-raised md-success">Ver</md-button></a>
+						<a ui-sref="editarEjemplar({id:ejemplar.id})"><md-button class="md-raised md-warn">Actualizar</md-button></a>
+						<md-button class="md-raised md-danger" ng-click="vm.showDialog($event,ejemplar)">Eliminar</md-button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</div>
+
+	<div><a ui-sref="crearEjemplar"><md-button class="md-fab md-primary">+</md-button></a></div>
+	
+</div>
+
+
+<div flex-offset="60" flex="40"></div>

@@ -1,0 +1,27 @@
+html, body, #root {
+  margin: 0;
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.md-button.md-raised.md-danger {
+  background-color: #D32F2F;
+  color: white;
+}
+
+
+
+.md-button.md-raised.md-danger:hover {
+  background-color: #C62828;
+}
+
+.md-button.md-raised.md-success {
+  background-color: #388E3C;
+  color: white;
+}
+
+
+
+.md-button.md-raised.md-success:hover {
+  background-color: #2E7D32;
+}

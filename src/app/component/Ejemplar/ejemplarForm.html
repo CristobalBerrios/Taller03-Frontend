@@ -1,0 +1,85 @@
+<div layout="row" layout-align="center start">
+	<h1  ng-if="vm.location === 'ver'">Detalles Ejemplar</h1>
+  <h1  ng-if="vm.location === 'crear'">Agregar Prestamo</h1>
+  <h1  ng-if="vm.location === 'editar'">Editar Prestamo</h1>
+</div>
+
+<div layout="row" layout-align="center" layout-wrap>
+  <div flex-lg="70" flex-xs="100">
+    <form ng-submit="myForm.$valid && vm.enviarFormulario(vm.ejemplar)" name="myForm" novalidate>
+
+      <md-input-container class="md-icon-float md-block">
+        <label>Libro</label>
+        <input type="text" ng-if="vm.location === 'ver'" value="{{vm.ejemplar.libro.titulo}}" readonly>
+
+        <md-select  name="selectLibro" ng-model="vm.ejemplar.libro_id" ng-model-options="{trackBy: '$value'}" required ng-if="vm.location === 'crear' || vm.location === 'editar'">
+          <md-option ng-repeat="libro in vm.libro" value="{{libro.id}}">{{libro.titulo}}</md-option>
+        </md-select>
+
+        <div ng-messages="myForm.selectLibro.$error">
+          <div ng-message="required">Debe ingresar un libro</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block" ng-if="vm.location === 'ver'">
+        <label>Autor</label>
+        <input type="text" value="{{vm.ejemplar.libro.autor.nombre}} {{vm.ejemplar.libro.autor.apellido}}" readonly>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block" ng-if="vm.location === 'ver'">
+        <label>Genero</label>
+        <input type="text" value="{{vm.ejemplar.libro.genero.descripcion}}" readonly>
+      </md-input-container>
+
+      <md-input-container md-no-float class="md-block">
+        <label>Usuario</label>
+        <input type="text" ng-if="vm.location === 'ver'" value="{{vm.ejemplar.usuario.nombre}} {{vm.ejemplar.usuario.apellido}}" readonly>
+
+        <md-select name="selectUsuario" ng-model="vm.ejemplar.usuario_id" ng-model-options="{trackBy: '$value'}" required ng-if="vm.location === 'crear' || vm.location === 'editar'">
+          <md-option ng-repeat="usuario in vm.usuarios" value="{{usuario.id}}">{{usuario.nombre}} {{usuario.apellido}}</md-option>
+        </md-select>
+
+        <div ng-messages="myForm.selectUsuario.$error">
+          <div ng-message="required">Debe ingresar un usuario</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block" ng-if="vm.location === 'ver'">
+        <label>Rut</label>
+        <input type="text" value="{{vm.ejemplar.usuario.rut}}">
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block" ng-if="vm.location === 'ver' || vm.location === 'editar'">
+        <label>Estado</label>
+        <input type="text" value="{{vm.ejemplar.estado.descripcion}}" readonly ng-if="vm.location === 'ver'">
+        <md-select ng-model="vm.ejemplar.estado_id" ng-model-options="{trackBy: '$value'}" required ng-if="vm.location === 'editar'">
+          <md-option ng-repeat="estado in vm.estados" value="{{estado.id}}">{{estado.descripcion}}</md-option>
+        </md-select>
+      </md-input-container>
+
+
+
+      <div> 
+        <label>Fecha Prestamo</label>
+        <label ng-if="vm.location === 'ver'">: {{vm.ejemplar.fecha_prestamo}}</label>
+        <md-datepicker name="prestamo" ng-model="vm.ejemplar.fecha_prestamo" md-placeholder="Ingrese la fecha" required required ng-if="vm.location === 'crear' || vm.location === 'editar'"></md-datepicker>
+
+      <div>
+        <label>Fecha Devolucion</label>
+        <label ng-if="vm.location === 'ver'">: {{vm.ejemplar.fecha_devolucion}}</label>
+        <md-datepicker name="devolucion" ng-model="vm.ejemplar.fecha_devolucion" md-min-date="vm.ejemplar.fecha_prestamo" md-placeholder="Ingrese la fecha" required required ng-if="vm.location === 'crear' || vm.location === 'editar'">
+        </md-datepicker>
+
+    
+      </div>
+      <br>
+      
+      <div layout="column" flex>
+        <md-button type="submit" class="md-raised md-primary" ng-if="vm.location === 'crear'">Agregar Prestamo</md-button>
+        <md-button type="submit" class="md-raised md-primary" ng-if="vm.location === 'editar'">Actualizar</md-button>
+        <a ui-sref="ejemplar" ng-if="vm.location === 'ver'"><md-button type="submit" class="md-raised md-primary">Volver</md-button></a>
+      </div>
+
+    </form>
+  </div>
+</div>
